@@ -1,37 +1,49 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {Body, Input, Button, Text} from '~/components';
 import {StyleSheet, Keyboard, ScrollView} from 'react-native';
+import {isEmail, isPassword} from '~/utils';
 import theme from '~/config/theme';
+
 const Login = ({navigation}) => {
   const [error, setError] = useState({
     email: '',
     password: '',
   });
   const [email, setEmail] = useState('phieuyet@gmail.com');
-  const [password, setPassword] = useState('123456');
+  const [password, setPassword] = useState();
+  const inputRef = useRef(null);
 
   const onCheckEmail = () => {
-    const regxEmail = new RegExp(
-      '^[a-z][a-z0-9_.]{5,32}@[a-z0-9]{2,}(.[a-z0-9]{2,4}){1,2}$',
-    );
-    if (!regxEmail.test(email)) {
+    if (!isEmail(email)) {
       return setError({...error, email: 'Sai định dạng email'});
     }
     setError({...error, email: ''});
   };
 
   const onCheckPassword = () => {
-    const regxPassword = new RegExp('^\\d{6}$', 'g');
-    if (!regxPassword.test(password)) {
+    if (!isPassword(password)) {
       return setError({...error, password: 'Sai định dạng password'});
     }
     setError({...error, password: ''});
   };
 
+  const onPassword = (pass) => {
+    if (pass.length === 6 && isPassword(password)) {
+      setError({...error, password: 'Sai định dạng password'});
+    } else {
+      setError({...error, password: ''});
+    }
+    setPassword(pass);
+  };
+
   const onlogin = () => {
     Keyboard.dismiss();
     navigation.navigate('welcome_screen');
+  };
+
+  const formIsValid = () => {
+    return isEmail(email) && isPassword(password);
   };
 
   const inputStyle = {
@@ -66,8 +78,9 @@ const Login = ({navigation}) => {
           keyboardType="email-address"
           selectTextOnFocus
           value={email}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={setEmail}
           onBlur={onCheckEmail}
+          onSubmitEditing={() => inputRef.current.focus()}
           error={error.email}
           autoFocus
         />
@@ -84,8 +97,9 @@ const Login = ({navigation}) => {
           keyboardType="number-pad"
           maxLength={6}
           value={password}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={onPassword}
           onBlur={onCheckPassword}
+          ref={inputRef}
           isSecure
           error={error.password}
         />
@@ -99,11 +113,15 @@ const Login = ({navigation}) => {
           center
           middle
           onPress={onlogin}
-          disabled={!!error.email.length || !!error.password.length}>
+          disabled={!formIsValid()}>
           <Text bold color="white">
             Login
           </Text>
         </Button>
+
+        <Text>
+          {isPassword(password) ? 'tr' : 'fa'} {password && password.length}
+        </Text>
 
         <Button
           center

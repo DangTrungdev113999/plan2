@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, forwardRef} from 'react';
 import styled from 'styled-components';
 import {StyleSheet} from 'react-native';
 
@@ -10,10 +10,10 @@ import Icon from './Icon';
 const WrapperInput = styled.View`
   flex-direction: row;
   align-items: center;
-  border-width: ${StyleSheet.hairlineWidth};
+  border-width: ${StyleSheet.hairlineWidth}px;
   border-color: ${({error}) =>
     error ? theme.colors.accent : theme.colors.black};
-  border-radius: ${theme.typo.font};
+  border-radius: ${theme.typo.font}px;
   height: ${theme.typo.base * 3}px;
 `;
 
@@ -23,22 +23,25 @@ const TextInput = styled.TextInput`
   color: ${theme.colors.black};
 `;
 
-const Input = ({
+const Input = (
+  {
+    error,
+    isSecure,
+    label,
+    onFocus,
+    onBlur,
+    iconLeft,
+    iconRight,
+    style,
+    ...rest
+  },
   ref,
-  error,
-  isSecure,
-  label,
-  onFocus,
-  onBlur,
-  iconLeft,
-  iconRight,
-  style,
-  ...rest
-}) => {
+) => {
   const [showPass, setShowPass] = useState(true);
   const [focus, setFocus] = useState(false);
 
   const inputProps = {
+    ref,
     secureTextEntry: showPass && isSecure,
     onFocus: () => {
       setFocus(true);
@@ -89,4 +92,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default forwardRef(Input);

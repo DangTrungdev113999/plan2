@@ -70,7 +70,6 @@ const Button = ({
           locations={locations}
           shadow={shadow}
           colors={colors}
-          disabled={disabled}
           {...props}>
           {children}
         </LinearGradient>
