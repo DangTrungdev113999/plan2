@@ -25,8 +25,7 @@ const LinearGradientStyled = styled(LinearGradient)`
   ${({column}) => column && `flex-direction: ${column};`}
   ${({center}) => center && 'justify-content: center;'}
   ${({middle}) => middle && 'align-items: center;'}
-  ${({justifyContent}) =>
-    justifyContent && `justify-content: ${justifyContent}`}
+  ${({justify}) => justify && `justify-content: ${justify}`}
   ${({alignItems}) => alignItems && `align-items: ${alignItems};`}
   ${({alignSelf}) => alignSelf && `align-self: ${alignSelf};`}
   ${({disabled}) => disabled && `background-color: ${theme.colors.gray};`}

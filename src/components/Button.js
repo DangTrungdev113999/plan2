@@ -20,6 +20,8 @@ padding: 0;
   ${({left}) => left && `right: ${left};`}
   ${({round, theme}) => round && `border-radius: ${theme.typo.radius}px;`}
   ${({borderWidth}) => borderWidth && `border-width: ${borderWidth}px;`}
+  ${({borderBottomWidth}) =>
+    borderBottomWidth && `border-bottom-width: ${borderBottomWidth}px;`}
   ${({borderColor}) => borderColor && `border-color: ${borderColor};`}
   ${({borderRadius}) => borderRadius && `border-radius: ${borderRadius}px`}
   ${({bg, theme}) =>
@@ -30,8 +32,7 @@ padding: 0;
   ${({column}) => column && 'flex-direction: column;'}
   ${({center}) => center && 'justify-content: center;'}
   ${({middle}) => middle && 'align-items: center;'}
-  ${({justifyContent}) =>
-    justifyContent && `justify-content: ${justifyContent}`}
+  ${({justify}) => justify && `justify-content: ${justify}`}
   ${({alignItems}) => alignItems && `align-items: ${alignItems};`}
   ${({alignSelf}) => alignSelf && `align-self: ${alignSelf};`}
   ${({shadow, theme}) =>

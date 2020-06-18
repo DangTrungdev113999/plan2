@@ -134,6 +134,7 @@ const Welcome = ({illustrations, navigation}) => {
             inputRange: [index - 1, index, index + 1],
             outputRange: [0.1, 1, 0.1],
             extrapolate: 'clamp',
+            useNativeDriver: true,
           });
           return (
             <Block
@@ -154,7 +155,7 @@ const Welcome = ({illustrations, navigation}) => {
 
   return (
     <Block block>
-      <Block column middle justifyContent="flex-start" m="50px 0 0" flex={0.4}>
+      <Block column middle justify="flex-start" m="50px 0 0" flex={0.4}>
         <Text h1 bold>
           Your home.{' '}
           <Text h1 bold color="primary">

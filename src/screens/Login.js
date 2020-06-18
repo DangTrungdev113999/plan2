@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useRef} from 'react';
-import {Body, Input, Button, Text} from '~/components';
 import {StyleSheet, Keyboard, ScrollView} from 'react-native';
+import {Body, Input, Button, Text} from '~/components';
 import {isEmail, isPassword} from '~/utils';
 import theme from '~/config/theme';
 
@@ -11,7 +11,8 @@ const Login = ({navigation}) => {
     password: '',
   });
   const [email, setEmail] = useState('phieuyet@gmail.com');
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState('123456');
+  const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
 
   const onCheckEmail = () => {
@@ -29,7 +30,7 @@ const Login = ({navigation}) => {
   };
 
   const onPassword = (pass) => {
-    if (pass.length === 6 && isPassword(password)) {
+    if (pass.length === 6 && !isPassword(pass)) {
       setError({...error, password: 'Sai định dạng password'});
     } else {
       setError({...error, password: ''});
@@ -38,8 +39,14 @@ const Login = ({navigation}) => {
   };
 
   const onlogin = () => {
+    setLoading(true);
     Keyboard.dismiss();
-    navigation.navigate('welcome_screen');
+    if (email === 'phieuyet@gmail.com' && password === '123456') {
+      setTimeout(() => {
+        setLoading(false);
+        navigation.navigate('home_stack', {screen: 'browse_screen'});
+      }, 1000);
+    }
   };
 
   const formIsValid = () => {
@@ -59,7 +66,7 @@ const Login = ({navigation}) => {
   };
 
   return (
-    <Body flex={1} keybordAvoid p="20px">
+    <Body flex={1} keybordAvoid overlay loading={loading} p="20px">
       <ScrollView
         keyboardDismissMode="interactive"
         keyboardShouldPersistTaps="handled">
@@ -85,7 +92,7 @@ const Login = ({navigation}) => {
           autoFocus
         />
         <Input
-          label="Password"
+          label="Mật khẩu"
           iconLeft={{
             name: 'key',
             type: 'antDesign',
@@ -118,11 +125,6 @@ const Login = ({navigation}) => {
             Login
           </Text>
         </Button>
-
-        <Text>
-          {isPassword(password) ? 'tr' : 'fa'} {password && password.length}
-        </Text>
-
         <Button
           center
           middle

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import styled from 'styled-components';
-
 import {Keyboard, Platform, TouchableWithoutFeedback} from 'react-native';
+
+import LoadingOverlay from './LoadingOverlay';
 
 import theme from '~/config/theme';
 
@@ -32,16 +33,20 @@ const KeyboardAvoidingView = styled.KeyboardAvoidingView`
     align-items: center;
     justify-content: center;
   `}
-  ${({p}) =>
-    p &&
-    `
-    padding: ${p};
-  `}
+  ${({p}) => p && `padding: ${p};`}
 `;
 
-const Body = ({children, keybordAvoid, ...rest}) => {
+const Body = ({
+  children,
+  keybordAvoid,
+  overlay,
+  loading,
+  loadingLabel,
+  ...rest
+}) => {
+  let view = <View {...rest}>{children}</View>;
   if (keybordAvoid) {
-    return (
+    view = (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -52,7 +57,20 @@ const Body = ({children, keybordAvoid, ...rest}) => {
       </TouchableWithoutFeedback>
     );
   }
-  return <View {...rest}>{children}</View>;
+
+  if (overlay) {
+    return (
+      <Fragment>
+        {view}
+        <LoadingOverlay
+          loading={!!loading}
+          title={loadingLabel ? loadingLabel : 'Đang tải...'}
+        />
+      </Fragment>
+    );
+  }
+
+  return view;
 };
 
 export default Body;
