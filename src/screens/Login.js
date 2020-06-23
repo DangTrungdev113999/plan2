@@ -1,9 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useRef} from 'react';
-import {StyleSheet, Keyboard, ScrollView} from 'react-native';
-import {Body, Input, Button, Text} from '~/components';
-import {isEmail, isPassword} from '~/utils';
+import React, {useRef, useState} from 'react';
+import {Keyboard, ScrollView, StyleSheet} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {login} from '~/actions/auth';
+import {Body, Button, Input, Text} from '~/components';
 import theme from '~/config/theme';
+import {isEmail, isPassword} from '~/utils';
 
 const Login = ({navigation}) => {
   const [error, setError] = useState({
@@ -14,6 +16,9 @@ const Login = ({navigation}) => {
   const [password, setPassword] = useState('123456');
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
+
+  const token = useSelector((state) => state.auth.token);
 
   const onCheckEmail = () => {
     if (!isEmail(email)) {
@@ -44,7 +49,8 @@ const Login = ({navigation}) => {
     if (email === 'phieuyet@gmail.com' && password === '123456') {
       setTimeout(() => {
         setLoading(false);
-        navigation.navigate('home_stack', {screen: 'browse_screen'});
+        dispatch(login());
+        // navigation.navigate('home_stack', {screen: 'browse_screen'});
       }, 1000);
     }
   };
@@ -71,7 +77,7 @@ const Login = ({navigation}) => {
         keyboardDismissMode="interactive"
         keyboardShouldPersistTaps="handled">
         <Text m="0 0 40px" h1 bold>
-          Login
+          Login {token === true ? 'true' : 'false'}
         </Text>
         <Input
           label="Email"

@@ -21,7 +21,8 @@ const HomeStack = () => (
       options={({navigation}) => ({
         title: '',
         headerRight: () => <Block />,
-        headerLeft: () => <DrawerIcon navigation={navigation} />,
+        // headerLeft: () => <DrawerIcon navigation={navigation} />,
+        headerLeft: () => <Block />,
       })}
     />
     <Stack.Screen
