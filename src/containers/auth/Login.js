@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useRef, useState} from 'react';
-import {Keyboard, ScrollView, StyleSheet} from 'react-native';
+import {Alert, Keyboard, ScrollView, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {login} from '~/actions/auth';
 import {Body, Button, Input, Text} from '~/components';
 import theme from '~/config/theme';
+import {login} from '~/modules/auth/action';
 import {isEmail, isPassword} from '~/utils';
 
 const Login = ({navigation}) => {
@@ -14,12 +14,14 @@ const Login = ({navigation}) => {
   });
   const [email, setEmail] = useState('phieuyet@gmail.com');
   const [password, setPassword] = useState('123456');
-  const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
-  const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.token);
+  const loading = useSelector((state) => state.auth.loginLoading);
+  const dispatch = useDispatch();
 
+  console.log('loading', loading);
+  console.log('token', token);
   const onCheckEmail = () => {
     if (!isEmail(email)) {
       return setError({...error, email: 'Sai định dạng email'});
@@ -44,15 +46,15 @@ const Login = ({navigation}) => {
   };
 
   const onlogin = () => {
-    setLoading(true);
     Keyboard.dismiss();
-    if (email === 'phieuyet@gmail.com' && password === '123456') {
-      setTimeout(() => {
-        setLoading(false);
-        dispatch(login());
-        // navigation.navigate('home_stack', {screen: 'browse_screen'});
-      }, 1000);
-    }
+    dispatch(
+      login({
+        email,
+        password,
+        onSuccess: () => Alert.alert('dang nhap thanh cong', 'hehe'),
+        onError: (e) => Alert.alert('Đăng nhập không thành công', e),
+      }),
+    );
   };
 
   const formIsValid = () => {

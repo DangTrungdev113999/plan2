@@ -1,10 +1,10 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import BrowseScreen from '~/screens/Browse';
-import ExploreScreen from '~/screens/Explore';
-import ProductScreen from '~/screens/Product';
-import SettingsScreen from '~/screens/Settings';
+import BrowseScreen from '~/containers/Browse';
+import ExploreScreen from '~/containers/Explore';
+import ProductScreen from '~/containers/Product';
+import SettingsScreen from '~/containers/Settings';
 
 import {navigationOptionCommon} from './navigationOption';
 import {Block} from '~/components';

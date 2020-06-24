@@ -1,10 +1,10 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import WelcomeScreen from '~/screens/Welcome';
-import LoginScreen from '~/screens/Login';
-import SignUpScreen from '~/screens/SignUp';
-import ForgotScreen from '~/screens/Forgot';
+import WelcomeScreen from '~/containers/auth/Welcome';
+import LoginScreen from '~/containers/auth/Login';
+import SignUpScreen from '~/containers/SignUp';
+import ForgotScreen from '~/containers/auth/Forgot';
 
 import {Block} from '~/components';
 import LeftIcon from '~/components/header/LeftIcon';

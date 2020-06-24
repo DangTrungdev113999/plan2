@@ -1,15 +1,12 @@
 import React from 'react';
 
 import {ThemeProvider} from 'styled-components';
-import Nagition from '~/navigation';
+import Nagition from '~/routes';
 
 import theme from '~/config/theme';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
 
-import rootReducer from '~/reducer';
-
-const store = createStore(rootReducer);
+import store from './configStore';
 
 const App = () => {
   return (
