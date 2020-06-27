@@ -1,29 +1,38 @@
 /* eslint-disable no-fallthrough */
 import produce from 'immer';
-import {LOG_IN, LOG_OUT, LOG_IN_SUCCEEDED, LOG_IN_FAILED} from './constants';
+import {
+  LOG_IN,
+  LOG_IN_SUCCEEDED,
+  LOG_IN_FAILED,
+  LOG_OUT_SUCCEEDED,
+} from './constants';
 
 const initState = {
   token: false,
   loginLoading: false,
   loginError: '',
+  logoutLoading: false,
 };
 
 const authReducer = produce((draft, action) => {
+  console.log({payload: action.payload});
   switch (action.type) {
     case LOG_IN:
       draft.loginLoading = true;
       draft.loginError = '';
+      break;
     case LOG_IN_SUCCEEDED:
       draft.loginLoading = false;
-      draft.loginError = '';
       draft.token = action.payload;
+      break;
     case LOG_IN_FAILED:
       draft.loginLoading = false;
       draft.loginError = action.payload;
-      draft.token = false;
+      break;
 
-    case LOG_OUT:
+    case LOG_OUT_SUCCEEDED:
       draft.token = false;
+      break;
   }
 }, initState);
 

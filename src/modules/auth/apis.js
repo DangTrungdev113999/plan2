@@ -4,3 +4,11 @@ export function login({email, password}) {
   }
   throw 'Email hoặc mật khẩu không chính xác';
 }
+
+export function logout({token}) {
+  console.log({token});
+  if (token) {
+    return false;
+  }
+  throw 'Đăng xuất không thành công';
+}

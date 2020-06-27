@@ -1,10 +1,10 @@
 /* eslint-disable curly */
-import {takeEvery, call, put, delay} from 'redux-saga/effects';
-import {LOG_IN} from './constants';
-import {login} from './apis';
-import {loginSucceeded, loginFailed} from './action';
+import {takeEvery, call, put, delay, select} from 'redux-saga/effects';
+import {LOG_IN, LOG_OUT} from './constants';
+import {login, logout} from './apis';
+import {loginSucceeded, loginFailed, logoutSucceeded} from './action';
 
-function* loginSideEffcet({payload}) {
+function* loginSideEffect({payload}) {
   try {
     const response = yield call(login, payload);
     yield delay(1000);
@@ -17,6 +17,17 @@ function* loginSideEffcet({payload}) {
   }
 }
 
+function* logoutSideEffect() {
+  try {
+    const token = yield select((state) => state.auth.token);
+    yield put(logoutSucceeded());
+    yield call(logout, {token});
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export default function* authSaga() {
-  yield takeEvery(LOG_IN, loginSideEffcet);
+  yield takeEvery(LOG_IN, loginSideEffect);
+  yield takeEvery(LOG_OUT, logoutSideEffect);
 }

@@ -20,8 +20,6 @@ const Login = ({navigation}) => {
   const loading = useSelector((state) => state.auth.loginLoading);
   const dispatch = useDispatch();
 
-  console.log('loading', loading);
-  console.log('token', token);
   const onCheckEmail = () => {
     if (!isEmail(email)) {
       return setError({...error, email: 'Sai định dạng email'});
@@ -51,7 +49,7 @@ const Login = ({navigation}) => {
       login({
         email,
         password,
-        onSuccess: () => Alert.alert('dang nhap thanh cong', 'hehe'),
+        onSuccess: () => Alert.alert('Hi you!', 'welcome back'),
         onError: (e) => Alert.alert('Đăng nhập không thành công', e),
       }),
     );
