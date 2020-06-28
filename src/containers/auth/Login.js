@@ -49,7 +49,7 @@ const Login = ({navigation}) => {
       login({
         email,
         password,
-        onSuccess: () => Alert.alert('Hi you!', 'welcome back'),
+        // onSuccess: () => Alert.alert('Hi you!', 'welcome back'),
         onError: (e) => Alert.alert('Đăng nhập không thành công', e),
       }),
     );

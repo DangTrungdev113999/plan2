@@ -11,11 +11,9 @@ const initState = {
   token: false,
   loginLoading: false,
   loginError: '',
-  logoutLoading: false,
 };
 
 const authReducer = produce((draft, action) => {
-  console.log({payload: action.payload});
   switch (action.type) {
     case LOG_IN:
       draft.loginLoading = true;

@@ -3,7 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import WelcomeScreen from '~/containers/auth/Welcome';
 import LoginScreen from '~/containers/auth/Login';
-import SignUpScreen from '~/containers/SignUp';
+import SignUpScreen from '~/containers/home/SignUp';
 import ForgotScreen from '~/containers/auth/Forgot';
 
 import {Block} from '~/components';
