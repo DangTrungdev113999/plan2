@@ -30,6 +30,7 @@ const Block = styled.View`
   ${({justify}) => justify && `justify-content: ${justify}`}
   ${({alignItems}) => alignItems && `align-items: ${alignItems};`}
   ${({alignSelf}) => alignSelf && `align-self: ${alignSelf};`}
+    ${({wrap}) => wrap && 'flex-wrap: wrap;'}
   ${({opacity}) => opacity && `opacity: ${opacity};`}
   ${({shadow, theme}) =>
     shadow &&

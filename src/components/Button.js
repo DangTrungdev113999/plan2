@@ -17,7 +17,7 @@ padding: 0;
   ${({top}) => top && `top: ${top};`}
   ${({bottom}) => bottom && `bottom: ${bottom};`}
   ${({right}) => right && `right: ${right};`}
-  ${({left}) => left && `right: ${left};`}
+  ${({left}) => left && `left: ${left};`}
   ${({round, theme}) => round && `border-radius: ${theme.typo.radius}px;`}
   ${({borderWidth}) => borderWidth && `border-width: ${borderWidth}px;`}
   ${({borderBottomWidth}) =>
@@ -35,11 +35,12 @@ padding: 0;
   ${({justify}) => justify && `justify-content: ${justify}`}
   ${({alignItems}) => alignItems && `align-items: ${alignItems};`}
   ${({alignSelf}) => alignSelf && `align-self: ${alignSelf};`}
+  ${({wrap}) => wrap && 'flex-wrap: wrap;'}
   ${({shadow, theme}) =>
     shadow &&
     `
     box-shadow: 3px 3px 10px ${theme.colors.gray};
-    elevation: 2;
+    elevation: 1;
   `}
   ${({disabled, theme}) =>
     disabled && `background-color: ${theme.colors.gray};`}

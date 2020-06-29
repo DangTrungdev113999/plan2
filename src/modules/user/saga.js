@@ -5,11 +5,11 @@ import {fetchProfileSucceeded, fetchProfileFailded} from './actions';
 function* fetchProfileSideEffect() {
   try {
     const token = yield select((state) => state.auth.token);
-    yield delay(500);
+    yield delay(100);
     const response = yield call(fetchProfile, {token});
     yield put(fetchProfileSucceeded(response));
   } catch (error) {
-    yield delay(500);
+    yield delay(100);
     yield put(fetchProfileFailded(error));
   }
 }

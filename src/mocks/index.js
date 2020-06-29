@@ -66,7 +66,6 @@ const products = [
 ];
 
 const explore = [
-  // images
   require('@assets/images/explore_1.png'),
   require('@assets/images/explore_2.png'),
   require('@assets/images/explore_3.png'),

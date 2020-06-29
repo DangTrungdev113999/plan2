@@ -28,8 +28,6 @@ const Browse = ({navigation}) => {
   const fetchProfileLoading = useSelector((state) => state.user.loading);
   const dispatch = useDispatch();
 
-  console.log({profile});
-
   useEffect(() => {
     dispatch(fetchCategory());
     dispatch(fetchProfile());

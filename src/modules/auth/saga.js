@@ -7,11 +7,11 @@ import {loginSucceeded, loginFailed, logoutSucceeded} from './action';
 function* loginSideEffect({payload}) {
   try {
     const response = yield call(login, payload);
-    yield delay(1000);
+    yield delay(100);
     yield put(loginSucceeded(response));
     if (payload.onSuccess) yield call(payload.onSuccess, response);
   } catch (error) {
-    yield delay(1000);
+    yield delay(100);
     yield put(loginFailed(error));
     if (payload.onError) yield call(payload.onError, error);
   }

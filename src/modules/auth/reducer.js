@@ -8,7 +8,7 @@ import {
 } from './constants';
 
 const initState = {
-  token: false,
+  token: true,
   loginLoading: false,
   loginError: '',
 };

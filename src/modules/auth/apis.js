@@ -6,7 +6,6 @@ export function login({email, password}) {
 }
 
 export function logout({token}) {
-  console.log({token});
   if (token) {
     return false;
   }
