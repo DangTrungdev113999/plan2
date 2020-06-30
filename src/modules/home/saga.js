@@ -35,10 +35,10 @@ function* fetchImagesSideEffect() {
   }
 }
 
-function* fetchProductSideEffect({id}) {
+function* fetchProductSideEffect({payload}) {
   try {
     const token = yield select((state) => state.auth.token);
-    const response = yield call(fetchProduct, {token, id});
+    const response = yield call(fetchProduct, {token, id: payload.id});
     yield delay(300);
     yield put(fetchProductSucceeded(response));
   } catch (error) {

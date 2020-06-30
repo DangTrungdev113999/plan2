@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
 import {Dimensions, ScrollView} from 'react-native';
-import {Body, Text, Block, Button} from '~/components';
+import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
-import {products} from '~/mocks';
-import {useSelector, useDispatch} from 'react-redux';
+import {Block, Body, Button, Text} from '~/components';
 import {fetchProduct} from '~/modules/home/action';
 const {width} = Dimensions.get('window');
 
@@ -26,6 +26,7 @@ const Browse = () => {
   useEffect(() => {
     dispatch(fetchProduct({id: 1}));
   }, []);
+
   return (
     <Body p="20px" bg="white" flex={1}>
       <ScrollView>
@@ -37,10 +38,10 @@ const Browse = () => {
           <Text h3 bold>
             {product.name}
           </Text>
-
           <Block row m="20px 0 30px">
             {product.tags.map((tag) => (
               <Block
+                key={tag}
                 p="5px 20px"
                 m="0 20px 0 0"
                 borderWidth={0.5}
