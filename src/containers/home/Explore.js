@@ -53,8 +53,6 @@ const Explore = ({navigation}) => {
     dispatch(fetchImages());
   }, []);
 
-  console.log({images});
-
   const handleSearchFocus = (status) => {
     setFlex(status ? 0.8 : 0.6);
   };
@@ -117,7 +115,7 @@ const Explore = ({navigation}) => {
           {renderSearch()}
         </Block>
         {renderImages()}
-        {renderFooter()}
+        {!loading ? renderFooter() : null}
       </ScrollView>
     </Body>
   );

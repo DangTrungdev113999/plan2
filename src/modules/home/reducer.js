@@ -6,6 +6,9 @@ import {
   FETCH_IMAGES,
   FETCH_IMAGES_SUCCEEDED,
   FETCH_IMAGES_FAILDED,
+  FETCH_PRODUCT,
+  FETCH_PRODUCT_SUCCEEDED,
+  FETCH_PRODUCT_FAILDED,
 } from './constants';
 
 const initState = {
@@ -16,6 +19,10 @@ const initState = {
   images: [],
   fetchImagesLoading: false,
   fetchImagesError: '',
+
+  product: {},
+  fetchProductLoading: false,
+  fetchProductError: '',
 };
 
 const homeReducer = produce((draft, action) => {
@@ -44,6 +51,19 @@ const homeReducer = produce((draft, action) => {
     case FETCH_IMAGES_FAILDED:
       draft.fetchImagesLoading = false;
       draft.fetchImagesError = action.payload;
+      break;
+
+    case FETCH_PRODUCT:
+      draft.fetchProductLoading = true;
+      draft.fetchProductError = '';
+      break;
+    case FETCH_PRODUCT_SUCCEEDED:
+      draft.fetchProductLoading = false;
+      draft.product = action.payload;
+      break;
+    case FETCH_PRODUCT_FAILDED:
+      draft.fetchProductLoading = false;
+      draft.fetchProductError = action.payload;
       break;
   }
 }, initState);

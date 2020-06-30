@@ -5,6 +5,9 @@ import {
   FETCH_IMAGES,
   FETCH_IMAGES_SUCCEEDED,
   FETCH_IMAGES_FAILDED,
+  FETCH_PRODUCT,
+  FETCH_PRODUCT_SUCCEEDED,
+  FETCH_PRODUCT_FAILDED,
 } from './constants';
 
 export const fetchCategory = () => ({
@@ -32,5 +35,20 @@ export const fetchImagesSucceeded = (payload = {}) => ({
 
 export const fetchImagesFailed = (payload = {}) => ({
   type: FETCH_IMAGES_FAILDED,
+  payload,
+});
+
+export const fetchProduct = (payload = {}) => ({
+  type: FETCH_PRODUCT,
+  payload,
+});
+
+export const fetchProductSucceeded = (payload = {}) => ({
+  type: FETCH_PRODUCT_SUCCEEDED,
+  payload,
+});
+
+export const fetchProductFailed = (payload = {}) => ({
+  type: FETCH_PRODUCT_FAILDED,
   payload,
 });
