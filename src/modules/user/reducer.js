@@ -4,6 +4,7 @@ import {
   FETCH_PROFILE_FAILED,
   FETCH_PROFILE_SUCCEEDED,
 } from './constants';
+import {REHYDRATE} from 'redux-persist';
 
 const initState = {
   profile: {},
@@ -24,6 +25,10 @@ const userReducer = produce((draft, action) => {
     case FETCH_PROFILE_FAILED:
       draft.loading = false;
       draft.error = action.payload;
+      break;
+
+    case REHYDRATE:
+      draft.profile = action?.payload?.user?.profile ?? initState.profile;
       break;
   }
 }, initState);

@@ -6,9 +6,10 @@ import {
   LOG_IN_FAILED,
   LOG_OUT_SUCCEEDED,
 } from './constants';
+import {REHYDRATE} from 'redux-persist';
 
 const initState = {
-  token: true,
+  token: false,
   loginLoading: false,
   loginError: '',
 };
@@ -31,6 +32,10 @@ const authReducer = produce((draft, action) => {
     case LOG_OUT_SUCCEEDED:
       draft.token = false;
       break;
+
+    // case REHYDRATE:
+    //   draft.token = action?.payload?.auth?.token ?? initState.token;
+    //   break;
   }
 }, initState);
 

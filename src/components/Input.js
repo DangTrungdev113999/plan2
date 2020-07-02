@@ -1,4 +1,4 @@
-import React, {useState, forwardRef} from 'react';
+import React, {useState, forwardRef, useEffect} from 'react';
 import styled from 'styled-components';
 import {StyleSheet} from 'react-native';
 
@@ -39,6 +39,8 @@ const Input = (
 ) => {
   const [showPass, setShowPass] = useState(true);
   const [focus, setFocus] = useState(false);
+
+  useEffect(() => {}, []);
 
   const inputProps = {
     ref,
