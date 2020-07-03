@@ -20,8 +20,8 @@ function* loginSideEffect({payload}) {
 function* logoutSideEffect() {
   try {
     const token = yield select((state) => state.auth.token);
-    yield put(logoutSucceeded());
-    yield call(logout, {token});
+    const response = yield call(logout, {token});
+    yield put(logoutSucceeded(response));
   } catch (error) {
     console.log(error);
   }

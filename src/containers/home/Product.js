@@ -27,8 +27,11 @@ const Browse = () => {
     dispatch(fetchProduct({id: 1}));
   }, []);
 
+  if (!product.images) {
+    return <Block />;
+  }
   return (
-    <Body p="20px" bg="white" flex={1}>
+    <Body p="20px" bg="white" overlay loading={loading} flex={1}>
       <ScrollView>
         <Block m="0 0 10px" h={300}>
           <MainImage source={product.images[0]} />

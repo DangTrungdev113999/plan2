@@ -11,23 +11,17 @@ import configureStore from './configureStore';
 import {Loading} from './components';
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const [store, setStore] = useState(
-    () => configureStore(() => setLoading(false)).store,
-  );
+  const store = configureStore().store;
+  const persistor = configureStore().persistor;
   return (
     <ThemeProvider theme={theme}>
-      {/* {loading ? (
-        <Loading color="black" size={40} />
-      ) : ( */}
       <Provider store={store}>
         <PersistGate
           loading={<Loading color="black" size={40} />}
-          persistor={configureStore().persistor}>
+          persistor={persistor}>
           <Navigation />
         </PersistGate>
       </Provider>
-      {/* )} */}
     </ThemeProvider>
   );
 };

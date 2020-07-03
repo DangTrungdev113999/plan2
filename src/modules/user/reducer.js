@@ -1,10 +1,10 @@
 import produce from 'immer';
+import {REHYDRATE} from 'redux-persist';
 import {
   FETCH_PROFILE,
   FETCH_PROFILE_FAILED,
   FETCH_PROFILE_SUCCEEDED,
 } from './constants';
-import {REHYDRATE} from 'redux-persist';
 
 const initState = {
   profile: {},

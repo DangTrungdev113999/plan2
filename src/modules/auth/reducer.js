@@ -1,12 +1,12 @@
 /* eslint-disable no-fallthrough */
 import produce from 'immer';
+import {REHYDRATE} from 'redux-persist';
 import {
   LOG_IN,
-  LOG_IN_SUCCEEDED,
   LOG_IN_FAILED,
+  LOG_IN_SUCCEEDED,
   LOG_OUT_SUCCEEDED,
 } from './constants';
-import {REHYDRATE} from 'redux-persist';
 
 const initState = {
   token: false,
@@ -21,8 +21,8 @@ const authReducer = produce((draft, action) => {
       draft.loginError = '';
       break;
     case LOG_IN_SUCCEEDED:
-      draft.loginLoading = false;
       draft.token = action.payload;
+      draft.loginLoading = false;
       break;
     case LOG_IN_FAILED:
       draft.loginLoading = false;
@@ -30,12 +30,13 @@ const authReducer = produce((draft, action) => {
       break;
 
     case LOG_OUT_SUCCEEDED:
-      draft.token = false;
+      draft.token = action.payload;
       break;
 
-    // case REHYDRATE:
-    //   draft.token = action?.payload?.auth?.token ?? initState.token;
-    //   break;
+    case REHYDRATE:
+      console.log({tokenREHYDRATE: action?.payload?.auth});
+      draft.token = action?.payload?.auth?.token ?? initState.token;
+      break;
   }
 }, initState);
 

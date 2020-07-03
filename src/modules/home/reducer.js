@@ -1,4 +1,5 @@
 import produce from 'immer';
+import {REHYDRATE} from 'redux-persist';
 import {
   FECTH_CATEGORY,
   FECTH_CATEGORY_SUCCEEDED,
@@ -10,7 +11,6 @@ import {
   FETCH_PRODUCT_SUCCEEDED,
   FETCH_PRODUCT_FAILDED,
 } from './constants';
-import {REHYDRATE} from 'redux-persist';
 
 const initState = {
   category: [],
@@ -67,9 +67,11 @@ const homeReducer = produce((draft, action) => {
       draft.fetchProductError = action.payload;
       break;
 
-    // case REHYDRATE:
-    //   draft.category = action?.payload?.home?.category ?? initState.category;
-    //   break;
+    case REHYDRATE:
+      draft.category = action?.payload?.home?.category ?? initState.category;
+      draft.images = action?.payload?.home?.images ?? initState.images;
+      draft.product = action?.payload?.home?.product ?? initState.product;
+      break;
   }
 }, initState);
 

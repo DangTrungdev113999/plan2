@@ -13,7 +13,7 @@ const Image = styled.Image`
   ${({img}) => {
     const sizes = ImageRN.resolveAssetSource(img);
     const fullWidth = width - theme.typo.padding * 2.5;
-    const resize = (sizes.width * 100) / fullWidth;
+    const resize = sizes ? (sizes.width * 100) / fullWidth : fullWidth;
     const imgWidth = resize > 75 ? fullWidth : sizes.width;
 
     return `

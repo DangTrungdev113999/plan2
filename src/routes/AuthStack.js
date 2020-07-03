@@ -29,7 +29,7 @@ const AuthStack = () => (
     <Stack.Screen
       name="login_screen"
       component={LoginScreen}
-      options={({route, navigation}) => ({
+      options={({navigation}) => ({
         title: '',
         headerRight: () => <Block />,
         headerLeft: () => <LeftIcon navigation={navigation} />,
@@ -39,7 +39,7 @@ const AuthStack = () => (
     <Stack.Screen
       name="signUp_screen"
       component={SignUpScreen}
-      options={({route, navigation}) => ({
+      options={({navigation}) => ({
         title: '',
         headerRight: () => <Block />,
         headerLeft: () => <LeftIcon navigation={navigation} />,
