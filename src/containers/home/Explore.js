@@ -1,11 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {Fragment, useState, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {Dimensions, Image as ImageRN, ScrollView} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import {Block, Body, Button, Input, Text} from '~/components';
 import theme from '~/config/theme';
-import {useDispatch, useSelector} from 'react-redux';
 import {fetchImages} from '~/modules/home/action';
+import {
+  imagesSelector,
+  fetchImagesLoadingSelector,
+} from '~/modules/home/selectors';
 
 const {width} = Dimensions.get('window');
 
@@ -45,8 +49,9 @@ const searchInputStyle = {
 const Explore = ({navigation}) => {
   const [search, setSearch] = useState('');
   const [flex, setFlex] = useState(0.6);
-  const images = useSelector((state) => state.home.images);
-  const loading = useSelector((state) => state.home.fetchImagesLoading);
+
+  const images = useSelector(imagesSelector);
+  const loading = useSelector(fetchImagesLoadingSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {

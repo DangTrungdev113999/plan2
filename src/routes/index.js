@@ -6,11 +6,12 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 import AuthStack from './AuthStack';
 import HomeStack from './HomeStack';
+import {tokenSelector} from '~/modules/auth/selectors';
 
 const Stack = createStackNavigator();
 
 const Navigation = () => {
-  const token = useSelector((state) => state.auth.token);
+  const token = useSelector(tokenSelector);
   console.log({tokenNavigation: token});
   return (
     <SafeAreaProvider>

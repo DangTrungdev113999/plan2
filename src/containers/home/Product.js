@@ -5,6 +5,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import {Block, Body, Button, Text} from '~/components';
 import {fetchProduct} from '~/modules/home/action';
+import {
+  productSelector,
+  fetchProductLoadingSelector,
+} from '~/modules/home/selectors';
+
 const {width} = Dimensions.get('window');
 
 const MainImage = styled.Image`
@@ -19,8 +24,8 @@ const Image = styled.Image`
 `;
 
 const Browse = () => {
-  const product = useSelector((state) => state.home.product);
-  const loading = useSelector((state) => state.home.fetchProductLoading);
+  const product = useSelector(productSelector);
+  const loading = useSelector(fetchProductLoadingSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {

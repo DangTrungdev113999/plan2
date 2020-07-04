@@ -6,8 +6,18 @@ import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import {Block, Body, Button, Card, Loading, Text} from '~/components';
 import theme from '~/config/theme';
+
 import {fetchCategory} from '~/modules/home/action';
+import {
+  categorySelector,
+  fetchCategoryLoadingSelector,
+} from '~/modules/home/selectors';
+
 import {fetchProfile} from '~/modules/user/actions';
+import {
+  profileSelector,
+  fetchProfileLoadingSelector,
+} from '~/modules/user/selector';
 
 const Image = styled.Image`
   width: ${theme.typo.base * 2.2}px;
@@ -18,14 +28,11 @@ const tabs = ['Products', 'Inspirations', 'Shop'];
 
 const Browse = ({navigation}) => {
   const [tabActive, setTabActive] = useState('Products');
-  const category = useSelector((state) =>
-    state.home.category.filter((category) =>
-      category.tags.includes(tabActive.toLowerCase()),
-    ),
-  );
-  const profile = useSelector((state) => state.user.profile);
-  const fetchCategoryLoading = useSelector((state) => state.home.loading);
-  const fetchProfileLoading = useSelector((state) => state.user.loading);
+
+  const category = useSelector((state) => categorySelector(state, tabActive));
+  const profile = useSelector(profileSelector);
+  const fetchCategoryLoading = useSelector(fetchCategoryLoadingSelector);
+  const fetchProfileLoading = useSelector(fetchProfileLoadingSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {PersistGate} from 'redux-persist/integration/react';
 
 import {ThemeProvider} from 'styled-components';

@@ -5,6 +5,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Body, Button, Input, Text} from '~/components';
 import theme from '~/config/theme';
 import {login} from '~/modules/auth/action';
+import {loginLoadingSelector} from '~/modules/auth/selectors';
+
 import {isEmail, isPassword} from '~/utils';
 
 const Login = ({navigation}) => {
@@ -16,8 +18,7 @@ const Login = ({navigation}) => {
   const [password, setPassword] = useState('123456');
   const inputRef = useRef(null);
 
-  const token = useSelector((state) => state.auth.token);
-  const loading = useSelector((state) => state.auth.loginLoading);
+  const loading = useSelector(loginLoadingSelector);
   const dispatch = useDispatch();
 
   const onCheckEmail = () => {
@@ -76,9 +77,7 @@ const Login = ({navigation}) => {
       <ScrollView
         keyboardDismissMode="interactive"
         keyboardShouldPersistTaps="handled">
-        <Text m="0 0 40px" h1 bold>
-          Login {token === true ? 'true' : 'false'}
-        </Text>
+        <Text m="0 0 40px" h1 bold></Text>
         <Input
           label="Email"
           iconLeft={{
