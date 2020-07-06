@@ -32,7 +32,7 @@ const Browse = () => {
     dispatch(fetchProduct({id: 1}));
   }, []);
 
-  if (!product.images) {
+  if (!product?.images) {
     return <Block />;
   }
   return (

@@ -28,7 +28,7 @@ export const fetchImagesLoadingSelector = createSelector(
 
 export const productSelector = createSelector(
   homeSelector,
-  (homeReducer) => homeReducer.proudct,
+  (homeReducer) => homeReducer.product,
 );
 
 export const fetchProductLoadingSelector = createSelector(

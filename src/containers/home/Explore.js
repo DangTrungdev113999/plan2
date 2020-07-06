@@ -126,43 +126,4 @@ const Explore = ({navigation}) => {
   );
 };
 
-  return (
-    <Body flex={1} p="20px" overlay loading={loading}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        keyboardDismissMode="interactive"
-        keyboardShouldPersistTaps="handled">
-        <Block row justify="space-between" middle>
-          <Text h1 bold>
-            Explore
-          </Text>
-          {renderSearch()}
-        </Block>
-        {renderImages()}
-        {!loading ? renderFooter() : null}
-      </ScrollView>
-    </Body>
-  );
-};
-
-  return (
-    <Body flex={1} p="20px" overlay loading={loading}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        keyboardDismissMode="interactive"
-        keyboardShouldPersistTaps="handled">
-        <Block row justify="space-between" middle>
-          <Text h1 bold>
-            Explore
-          </Text>
-          {renderSearch()}
-        </Block>
-        {renderImages()}
-        {!loading ? renderFooter() : null}
-      </ScrollView>
-    </Body>
-  );
-};
-
-
 export default Explore;

@@ -12,7 +12,6 @@ const Stack = createStackNavigator();
 
 const Navigation = () => {
   const token = useSelector(tokenSelector);
-  console.log({tokenNavigation: token});
   return (
     <SafeAreaProvider>
       <NavigationContainer>

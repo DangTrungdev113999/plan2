@@ -27,16 +27,6 @@ function* logoutSideEffect() {
   }
 }
 
-function* logoutSideEffect() {
-  try {
-    const token = yield select((state) => state.auth.token);
-    const response = yield call(logout, {token});
-    yield put(logoutSucceeded(response));
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 export default function* authSaga() {
   yield takeEvery(LOG_IN, loginSideEffect);
   yield takeEvery(LOG_OUT, logoutSideEffect);

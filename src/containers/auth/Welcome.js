@@ -8,11 +8,11 @@ import {
   Modal,
   ScrollView,
 } from 'react-native';
+import Swiper from 'react-native-swiper';
 
 import {Button, Block, Text} from '~/components';
 
 const {width, height} = Dimensions.get('window');
-const scrollX = new Animated.Value(0);
 
 const Welcome = ({illustrations, navigation}) => {
   const [showTerms, setShowTerms] = useState(false);
@@ -117,41 +117,8 @@ const Welcome = ({illustrations, navigation}) => {
           style={{width, height: height / 2, overflow: 'visible'}}
         />
       )}
-      onScroll={Animated.event([
-        {
-          nativeEvent: {contentOffset: {x: scrollX}},
-        },
-      ])}
     />
   );
-
-  const renderSteps = () => {
-    const stepPosition = Animated.divide(scrollX, width);
-    return (
-      <Block row absolute bottom={16 * 3}>
-        {illustrations.map((item, index) => {
-          const opacity = stepPosition.interpolate({
-            inputRange: [index - 1, index, index + 1],
-            outputRange: [0.1, 1, 0.1],
-            extrapolate: 'clamp',
-            useNativeDriver: true,
-          });
-          return (
-            <Block
-              animated
-              key={`step-${index}`}
-              w={5}
-              h={5}
-              borderRadius={5}
-              m="2.5px 0"
-              opacity={opacity[index]}
-              bg="gray"
-            />
-          );
-        })}
-      </Block>
-    );
-  };
 
   return (
     <Block block>
@@ -169,7 +136,6 @@ const Welcome = ({illustrations, navigation}) => {
 
       <Block center middle>
         {renderIllustrations()}
-        {renderSteps()}
       </Block>
 
       <Block middle flex={0.5} p=" 0 20px">
