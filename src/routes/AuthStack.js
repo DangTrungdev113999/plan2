@@ -3,8 +3,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import WelcomeScreen from '~/containers/auth/Welcome';
 import LoginScreen from '~/containers/auth/Login';
-import SignUpScreen from '~/containers/home/SignUp';
+import SignUpScreen from '~/containers/auth/SignUp';
 import ForgotScreen from '~/containers/auth/Forgot';
+import Verification from '~/containers/auth/Verification';
 
 import {Block} from '~/components';
 import LeftIcon from '~/components/header/LeftIcon';
@@ -46,6 +47,13 @@ const AuthStack = () => (
       })}
     />
     <Stack.Screen name="forgot_screen" component={ForgotScreen} />
+    <Stack.Screen
+      name="vertification_screen"
+      component={Verification}
+      options={{
+        title: 'Nhập mã xác thực',
+      }}
+    />
   </Stack.Navigator>
 );
 

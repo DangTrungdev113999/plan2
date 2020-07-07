@@ -6,10 +6,15 @@ import {
   LOG_IN_FAILED,
   LOG_IN_SUCCEEDED,
   LOG_OUT_SUCCEEDED,
+  SIGN_UP,
+  SIGN_UP_SUCCEEDED,
+  SIGN_UP_FAILED,
 } from './constants';
 
 const initState = {
-  token: false,
+  token: '',
+  signUpLoading: false,
+  signUpError: '',
   loginLoading: false,
   loginError: '',
 };
@@ -33,8 +38,21 @@ const authReducer = produce((draft, action) => {
       draft.token = action.payload;
       break;
 
+    case SIGN_UP:
+      draft.signUpError = '';
+      draft.signUpLoading = true;
+      break;
+    case SIGN_UP_SUCCEEDED:
+      draft.signUpLoading = false;
+      draft.token = action.payload;
+      break;
+    case SIGN_UP_FAILED:
+      draft.signUpLoading = false;
+      draft.signUpError = action.payload;
+      break;
+
     case REHYDRATE:
-      console.log({tokenREHYDRATE: action?.payload?.auth});
+      console.log({tokenREHYDRATE: action?.payload?.auth?.token});
       draft.token = action?.payload?.auth?.token ?? initState.token;
       break;
   }

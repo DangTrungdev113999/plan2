@@ -11,3 +11,7 @@ export const isPassword = (password) => {
 
   return regxPassword.test(password);
 };
+
+export const isPhone = (phone) => {
+  return true;
+};

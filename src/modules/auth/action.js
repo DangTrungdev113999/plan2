@@ -3,6 +3,9 @@ import {
   LOG_OUT,
   LOG_IN_SUCCEEDED,
   LOG_OUT_SUCCEEDED,
+  SIGN_UP,
+  SIGN_UP_SUCCEEDED,
+  SIGN_UP_FAILED,
 } from './constants';
 
 export const login = (payload = {}) => ({
@@ -27,5 +30,20 @@ export const logout = (payload = {}) => ({
 
 export const logoutSucceeded = (payload = {}) => ({
   type: LOG_OUT_SUCCEEDED,
+  payload,
+});
+
+export const signUp = (payload = {}) => ({
+  type: SIGN_UP,
+  payload,
+});
+
+export const signUpSucceeded = (payload = {}) => ({
+  type: SIGN_UP_SUCCEEDED,
+  payload,
+});
+
+export const signUpFailed = (payload = {}) => ({
+  type: SIGN_UP_FAILED,
   payload,
 });

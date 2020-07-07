@@ -10,8 +10,6 @@ import {Provider} from 'react-redux';
 import DeviceInfo from 'react-native-device-info';
 const currentVersion = DeviceInfo.getVersion();
 
-console.log({currentVersion});
-
 import configureStore from './configureStore';
 import {Loading} from './components';
 
