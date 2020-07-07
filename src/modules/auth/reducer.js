@@ -9,6 +9,9 @@ import {
   SIGN_UP,
   SIGN_UP_SUCCEEDED,
   SIGN_UP_FAILED,
+  SET_PASSWORD_FAILDED,
+  SET_PASSWORD,
+  SET_PASSWORD_SUCCEEDED,
 } from './constants';
 
 const initState = {
@@ -17,6 +20,8 @@ const initState = {
   signUpError: '',
   loginLoading: false,
   loginError: '',
+  setPasswordLoading: false,
+  setPasswordError: '',
 };
 
 const authReducer = produce((draft, action) => {
@@ -39,16 +44,28 @@ const authReducer = produce((draft, action) => {
       break;
 
     case SIGN_UP:
-      draft.signUpError = '';
       draft.signUpLoading = true;
+      draft.signUpError = '';
       break;
     case SIGN_UP_SUCCEEDED:
       draft.signUpLoading = false;
-      draft.token = action.payload;
+      // draft.token = action.payload;
       break;
     case SIGN_UP_FAILED:
       draft.signUpLoading = false;
       draft.signUpError = action.payload;
+      break;
+
+    case SET_PASSWORD:
+      draft.setPasswordLoading = true;
+      draft.setPasswordError = '';
+      break;
+    case SET_PASSWORD_SUCCEEDED:
+      draft.setPasswordLoading = false;
+      break;
+    case SET_PASSWORD_FAILDED:
+      draft.setPasswordLoading = false;
+      draft.setPasswordError = action.payload;
       break;
 
     case REHYDRATE:

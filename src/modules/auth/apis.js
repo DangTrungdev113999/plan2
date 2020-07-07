@@ -38,3 +38,10 @@ export function signUp({token}) {
 
   throw 'Đăng ký không thành công';
 }
+
+export function setPassword({token, password}) {
+  if (token.length && password.length === 6) {
+    return true;
+  }
+  throw 'Đặt mật khẩu không thành công';
+}

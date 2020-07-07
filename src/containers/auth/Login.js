@@ -1,13 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useRef, useState} from 'react';
-import {Alert, Keyboard, ScrollView, StyleSheet} from 'react-native';
+import {Keyboard, ScrollView, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {Body, Button, Input, Text} from '~/components';
 import theme from '~/config/theme';
 import {login} from '~/modules/auth/action';
 import {loginLoadingSelector} from '~/modules/auth/selectors';
 
-import {isEmail, isPassword} from '~/utils';
+import {isEmail, isPassword, showAlert} from '~/utils';
 
 const Login = ({navigation}) => {
   const [error, setError] = useState({
@@ -51,7 +51,7 @@ const Login = ({navigation}) => {
         email,
         password,
         // onSuccess: () => Alert.alert('Hi you!', 'welcome back'),
-        onError: (e) => Alert.alert('Đăng nhập không thành công', e),
+        onError: (e) => showAlert('Đăng nhập không thành công', e),
       }),
     );
   };
@@ -77,7 +77,6 @@ const Login = ({navigation}) => {
       <ScrollView
         keyboardDismissMode="interactive"
         keyboardShouldPersistTaps="handled">
-        <Text m="0 0 40px" h1 bold></Text>
         <Input
           label="Email"
           iconLeft={{
@@ -85,6 +84,7 @@ const Login = ({navigation}) => {
             type: 'antDesign',
             size: 18,
           }}
+          m="0 0 40px"
           style={[{...inputStyle}, error.email && {...hasError}]}
           placeholder="Email"
           keyboardType="email-address"

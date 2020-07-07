@@ -6,9 +6,11 @@ import {
   logoutSucceeded,
   signUpSucceeded,
   signUpFailed,
+  setPasswordSucceeded,
+  setPasswordFailded,
 } from './action';
-import {login, logout, signUp} from './apis';
-import {LOG_IN, LOG_OUT, SIGN_UP} from './constants';
+import {login, logout, signUp, setPassword} from './apis';
+import {LOG_IN, LOG_OUT, SIGN_UP, SET_PASSWORD} from './constants';
 
 function* loginSideEffect({payload}) {
   try {
@@ -36,7 +38,6 @@ function* logoutSideEffect() {
 function* signUpSideEffect({payload}) {
   try {
     const response = yield call(signUp, payload);
-    console.log({response});
     yield delay(100);
     yield put(signUpSucceeded(response));
     if (payload.onSuccess) yield call(payload.onSuccess, response);
@@ -47,8 +48,24 @@ function* signUpSideEffect({payload}) {
   }
 }
 
+function* setPasswordEffect({payload}) {
+  try {
+    const token = yield select((state) => state.auth.token);
+    const response = yield call(setPassword, {
+      token,
+      ...payload,
+    });
+    yield delay(100);
+    yield put(setPasswordSucceeded());
+  } catch (error) {
+    yield delay(100);
+    yield put(setPasswordFailded(error));
+  }
+}
+
 export default function* authSaga() {
   yield takeEvery(LOG_IN, loginSideEffect);
   yield takeEvery(LOG_OUT, logoutSideEffect);
   yield takeEvery(SIGN_UP, signUpSideEffect);
+  yield takeEvery(SET_PASSWORD, setPasswordEffect);
 }

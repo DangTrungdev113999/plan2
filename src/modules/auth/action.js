@@ -6,6 +6,9 @@ import {
   SIGN_UP,
   SIGN_UP_SUCCEEDED,
   SIGN_UP_FAILED,
+  SET_PASSWORD,
+  SET_PASSWORD_SUCCEEDED,
+  SET_PASSWORD_FAILDED,
 } from './constants';
 
 export const login = (payload = {}) => ({
@@ -45,5 +48,20 @@ export const signUpSucceeded = (payload = {}) => ({
 
 export const signUpFailed = (payload = {}) => ({
   type: SIGN_UP_FAILED,
+  payload,
+});
+
+export const setPassword = (payload = {}) => ({
+  type: SET_PASSWORD,
+  payload,
+});
+
+export const setPasswordSucceeded = (payload = {}) => ({
+  type: SET_PASSWORD_SUCCEEDED,
+  payload,
+});
+
+export const setPasswordFailded = (payload = {}) => ({
+  type: SET_PASSWORD_FAILDED,
   payload,
 });

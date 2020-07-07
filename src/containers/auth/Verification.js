@@ -1,16 +1,17 @@
+/* eslint-disable no-catch-shadow */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useRef} from 'react';
-import {StyleSheet, Keyboard, ScrollView} from 'react-native';
-import {Body, Input, Button, Text} from '~/components';
-
+import React, {useState} from 'react';
+import {Keyboard, ScrollView, StyleSheet} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {Body, Button, Input, Text} from '~/components';
+import theme from '~/config/theme';
 import {signUp} from '~/modules/auth/action';
-
 import {
   comfirmFirabasePhoneAuthToGetToken,
   getFirabaseIdToken,
 } from '~/modules/auth/apis';
-import theme from '~/config/theme';
-import {useDispatch} from 'react-redux';
+import {signUpLoadingSelector} from '~/modules/auth/selectors';
+import {showAlert} from '~/utils';
 
 const Verification = ({navigation, route}) => {
   const [error, setError] = useState({
@@ -18,6 +19,7 @@ const Verification = ({navigation, route}) => {
   });
   const [code, setCode] = useState('123456');
   const [loading, setLoading] = useState(false);
+  const signUpLoading = useSelector(signUpLoadingSelector);
   const dispath = useDispatch();
 
   async function onConfirmCode() {
@@ -32,13 +34,13 @@ const Verification = ({navigation, route}) => {
         throw new Error('Lỗi kết nối hệ thống. Vui lòng thử lại.');
       }
 
-      handleToken();
-    } catch {
-      console.log('Invalid code.', error);
+      doAction();
+    } catch (e) {
+      console.log('Invalid code.', e);
     }
   }
 
-  async function handleToken() {
+  async function doAction() {
     try {
       const idTokenResult = await getFirabaseIdToken();
       if (!idTokenResult.token) {
@@ -48,20 +50,18 @@ const Verification = ({navigation, route}) => {
         signUp({
           token: idTokenResult.token,
           onSuccess: () =>
-            // navigation.replace('set_password_stack', {
-            //   screen: 'set_password_screen',
-            //   params: {fromScreen: 'sign_up'},
-            // }),
-            console.log('thanh cong'),
+            navigation.replace('set_password_stack', {
+              screen: 'set_password_screen',
+              params: {fromScreen: 'sign_up'},
+            }),
           onError: (e) => {
-            // alert.alert('Đăng ký không thành công', e.message);
-            // navigation.goBack(null);
-            console.log('that bai');
+            showAlert('Đăng ký không thành công', e.message);
+            navigation.goBack(null);
           },
         }),
       );
-    } catch {
-      console.log('handleToken error', error);
+    } catch (e) {
+      console.log('handleToken error', e);
     }
     setLoading(false);
   }
@@ -73,7 +73,7 @@ const Verification = ({navigation, route}) => {
     setError({...error, code: ''});
   };
 
-  const formIsValid = () => {
+  const buttonIsValid = () => {
     return code.length === 6;
   };
 
@@ -90,7 +90,12 @@ const Verification = ({navigation, route}) => {
   };
 
   return (
-    <Body flex={1} keybordAvoid overlay loading={loading} p="20px">
+    <Body
+      flex={1}
+      keybordAvoid
+      overlay
+      loading={signUpLoading || loading}
+      p="20px">
       <ScrollView
         keyboardDismissMode="interactive"
         keyboardShouldPersistTaps="handled">
@@ -100,7 +105,7 @@ const Verification = ({navigation, route}) => {
             type: 'antDesign',
             size: 18,
           }}
-          style={[{...inputStyle}, error.email && {...hasError}]}
+          style={[{...inputStyle}, error.code && {...hasError}]}
           placeholder="Code"
           keyboardType="number-pad"
           selectTextOnFocus
@@ -120,7 +125,7 @@ const Verification = ({navigation, route}) => {
           center
           middle
           onPress={onConfirmCode}
-          disabled={!formIsValid()}>
+          disabled={!buttonIsValid()}>
           <Text bold color="white">
             Next
           </Text>

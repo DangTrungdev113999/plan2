@@ -1,9 +1,10 @@
+/* eslint-disable no-catch-shadow */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {StyleSheet, Keyboard, ScrollView, Alert} from 'react-native';
 import {Body, Input, Button, Text} from '~/components';
 
-import {isPhone} from '~/utils';
+import {isPhone, showAlert} from '~/utils';
 
 import {getFirabasePhoneAuthVerificCode} from '~/modules/auth/apis';
 import theme from '~/config/theme';
@@ -13,7 +14,6 @@ const Login = ({navigation}) => {
     phoneNumber: '',
   });
   const [phoneNumber, setPhoneNumber] = useState('+84321234567');
-
   const [loading, setLoading] = useState(false);
 
   async function onSignUp() {
@@ -27,9 +27,9 @@ const Login = ({navigation}) => {
           confirmation,
         });
       }
-    } catch {
-      console.log('getFirabasePhoneAuthVerificCode error', error);
-      Alert.alert(error);
+    } catch (e) {
+      console.log('getFirabasePhoneAuthVerificCode error', e);
+      showAlert(e);
     }
     setLoading(false);
   }
@@ -41,7 +41,7 @@ const Login = ({navigation}) => {
     setError({...error, phoneNumber: ''});
   };
 
-  const formIsValid = () => {
+  const buttonIsValid = () => {
     return isPhone(phoneNumber);
   };
 
@@ -72,7 +72,7 @@ const Login = ({navigation}) => {
             type: 'antDesign',
             size: 18,
           }}
-          style={[{...inputStyle}, error.email && {...hasError}]}
+          style={[{...inputStyle}, error.phoneNumber && {...hasError}]}
           placeholder="Số điện thoại"
           keyboardType="number-pad"
           selectTextOnFocus
@@ -92,7 +92,7 @@ const Login = ({navigation}) => {
           center
           middle
           onPress={onSignUp}
-          disabled={!formIsValid()}>
+          disabled={!buttonIsValid()}>
           <Text bold color="white">
             Sign up
           </Text>
