@@ -57,9 +57,11 @@ function* setPasswordEffect({payload}) {
     });
     yield delay(100);
     yield put(setPasswordSucceeded());
+    if (payload.onSuccess) yield call(payload.onSuccess, response);
   } catch (error) {
     yield delay(100);
     yield put(setPasswordFailded(error));
+    if (payload.onError) yield call(payload.onError, error);
   }
 }
 

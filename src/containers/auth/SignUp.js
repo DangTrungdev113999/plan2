@@ -79,7 +79,7 @@ const Login = ({navigation}) => {
           value={phoneNumber}
           onChangeText={setPhoneNumber}
           onBlur={onCheckPhone}
-          error={error.email}
+          error={error.phoneNumber}
           autoFocus
         />
 

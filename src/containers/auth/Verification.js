@@ -48,14 +48,14 @@ const Verification = ({navigation, route}) => {
       }
       dispath(
         signUp({
-          token: idTokenResult.token,
+          idToken: idTokenResult.token,
           onSuccess: () =>
             navigation.replace('set_password_stack', {
               screen: 'set_password_screen',
               params: {fromScreen: 'sign_up'},
             }),
           onError: (e) => {
-            showAlert('Đăng ký không thành công', e.message);
+            showAlert('Đăng ký không thành công', e);
             navigation.goBack(null);
           },
         }),
@@ -127,7 +127,7 @@ const Verification = ({navigation, route}) => {
           onPress={onConfirmCode}
           disabled={!buttonIsValid()}>
           <Text bold color="white">
-            Next
+            Xác nhận
           </Text>
         </Button>
       </ScrollView>

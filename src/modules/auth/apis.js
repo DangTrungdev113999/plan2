@@ -19,7 +19,7 @@ export function getFirabaseIdToken() {
 
 export function login({email, password}) {
   if (email === 'phieuyet@gmail.com' && password === '123456') {
-    return true;
+    return '1234';
   }
   throw 'Email hoặc mật khẩu không chính xác';
 }
@@ -31,9 +31,9 @@ export function logout({token}) {
   throw 'Đăng xuất không thành công';
 }
 
-export function signUp({token}) {
-  if (token.length) {
-    return token;
+export function signUp({idToken}) {
+  if (idToken.length) {
+    return 'this is token from server';
   }
 
   throw 'Đăng ký không thành công';
@@ -43,5 +43,6 @@ export function setPassword({token, password}) {
   if (token.length && password.length === 6) {
     return true;
   }
+
   throw 'Đặt mật khẩu không thành công';
 }

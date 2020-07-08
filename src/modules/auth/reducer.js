@@ -26,6 +26,19 @@ const initState = {
 
 const authReducer = produce((draft, action) => {
   switch (action.type) {
+    case SIGN_UP:
+      draft.signUpLoading = true;
+      draft.signUpError = '';
+      break;
+    case SIGN_UP_SUCCEEDED:
+      draft.signUpLoading = false;
+      draft.token = action.payload;
+      break;
+    case SIGN_UP_FAILED:
+      draft.signUpLoading = false;
+      draft.signUpError = action.payload;
+      break;
+
     case LOG_IN:
       draft.loginLoading = true;
       draft.loginError = '';
@@ -41,19 +54,6 @@ const authReducer = produce((draft, action) => {
 
     case LOG_OUT_SUCCEEDED:
       draft.token = action.payload;
-      break;
-
-    case SIGN_UP:
-      draft.signUpLoading = true;
-      draft.signUpError = '';
-      break;
-    case SIGN_UP_SUCCEEDED:
-      draft.signUpLoading = false;
-      // draft.token = action.payload;
-      break;
-    case SIGN_UP_FAILED:
-      draft.signUpLoading = false;
-      draft.signUpError = action.payload;
       break;
 
     case SET_PASSWORD:

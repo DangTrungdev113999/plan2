@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import SettingsScreen from '~/containers/auth/SetPassword';
+import SetPasswordScreen from '~/containers/auth/SetPassword';
 
 import {navigationOptionCommon} from './navigationOption';
 import {Block} from '~/components';
@@ -12,11 +12,10 @@ const HomeStack = () => (
   <Stack.Navigator screenOptions={{...navigationOptionCommon}}>
     <Stack.Screen
       name="set_password_screen"
-      component={SettingsScreen}
+      component={SetPasswordScreen}
       options={{
-        title: '',
-        headerRight: () => <Block />,
-        headerLeft: () => <Block />,
+        title: 'Nhập mật khẩu',
+        headerTitleAlign: 'center',
       }}
     />
   </Stack.Navigator>

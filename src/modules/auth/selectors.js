@@ -16,3 +16,8 @@ export const signUpLoadingSelector = createSelector(
   authSelector,
   (authReducer) => authReducer.signUpLoading,
 );
+
+export const setPasswordLoadingSelector = createSelector(
+  authSelector,
+  (authReducer) => authReducer.setPasswordLoading,
+);
